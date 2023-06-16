@@ -1,15 +1,18 @@
 import Restaurant from "./Restaurant";
 import PropTypes from "prop-types";
 
-const RestaurantList = ({ data }) => {
-  const restaurantComponents = data.map((restaurant) => {
+const RestaurantList = (props) => {
+  const restaurantComponents = props.data.map((restaurant) => {
     return (
       <Restaurant
         key={restaurant.id}
+        id={restaurant.id}
         name={restaurant.name}
         cuisine={restaurant.cuisine}
         rating={restaurant.rating}
         distance={restaurant.distance}
+        updateRating={props.updateRating}
+        deleteRestaurant={props.deleteRestaurant}
       />
     );
   });
