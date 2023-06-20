@@ -6,6 +6,8 @@ import PropTypes from "prop-types";
 //   const cuisine = props.cuisine;
 //   const rating = props.rating;
 //   const distance = props.distance;
+//   const updateRating = props.updateRating;
+//   const deleteRestaurant = props.deleteRestaurant;
 
 const Restaurant = ({
   id,
@@ -64,6 +66,8 @@ Restaurant.propTypes = {
   cuisine: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
   distance: PropTypes.string.isRequired,
+  updateRating: PropTypes.func.isRequired,
+  deleteRestaurant: PropTypes.func.isRequired
 };
 
 export default Restaurant;

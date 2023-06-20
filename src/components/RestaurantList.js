@@ -35,6 +35,8 @@ RestaurantList.propTypes = {
       distance: PropTypes.string.isRequired,
     })
   ).isRequired,
+  updateRating: PropTypes.func.isRequired,
+  deleteRestaurant: PropTypes.func.isRequired
 };
 
 export default RestaurantList;

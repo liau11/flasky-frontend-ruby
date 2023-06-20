@@ -54,9 +54,15 @@ function App() {
   };
 
   const deleteRestaurant = (id) => {
-    const newRestaurants = restaurants.filter(
-      (restaurant) => restaurant.id !== id
-    );
+    // const newRestaurants = restaurants.filter(
+    //   (restaurant) => restaurant.id !== id
+    // );
+    const newRestaurants = [];
+    for (let restaurant of restaurants) {
+      if (restaurant.id !== id) {
+        newRestaurants.push(restaurant)
+      }
+    }
     setRestaurants(newRestaurants);
   };
 
