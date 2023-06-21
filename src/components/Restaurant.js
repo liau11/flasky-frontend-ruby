@@ -65,9 +65,9 @@ Restaurant.propTypes = {
   name: PropTypes.string.isRequired,
   cuisine: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
-  distance: PropTypes.string.isRequired,
+  distance: PropTypes.number.isRequired,
   updateRating: PropTypes.func.isRequired,
-  deleteRestaurant: PropTypes.func.isRequired
+  deleteRestaurant: PropTypes.func.isRequired,
 };
 
 export default Restaurant;
