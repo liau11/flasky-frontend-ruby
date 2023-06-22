@@ -1,6 +1,7 @@
 import RestaurantList from "./components/RestaurantList";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import NewRestaurantForm from "./components/NewRestaurantForm";
 
 // const data = [
 //   {
@@ -122,11 +123,12 @@ function App() {
 
   return (
     <div className="App">
-      <RestaurantList
+      {/* <RestaurantList
         data={restaurants}
         updateRating={changeRating}
         deleteRestaurant={deleteRestaurant}
-      />
+      /> */}
+      <NewRestaurantForm/>
     </div>
   );
 }
