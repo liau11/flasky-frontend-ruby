@@ -39,17 +39,33 @@ function App() {
   const API =
     "https://nancy-harris-ruby-restaurant-flasky.onrender.com/restaurant";
 
-  useEffect(() => {
+  const getAllRestaurants = () => {
     axios
       .get(API)
       .then((result) => {
-        console.log(result.data);
+        console.log("in helper function");
         setRestaurants(result.data);
       })
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  useEffect(() => {
+    getAllRestaurants();
   }, []);
+
+  const postRestaurant = (newRestaurantData) => {
+    axios
+      .post(API, newRestaurantData)
+      .then((result) => {
+        console.log(result.data);
+        getAllRestaurants();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   // changeRating that updates state via API call
   const changeRating = (id, originalRating, direction) => {
@@ -60,14 +76,7 @@ function App() {
       .patch(`${API}/${id}/rating`, { value: newRating })
       .then((result) => {
         console.log(result.data);
-        axios
-          .get(API)
-          .then((result) => {
-            setRestaurants(result.data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        getAllRestaurants();
       })
       .catch((err) => {
         console.log(err);
@@ -123,12 +132,12 @@ function App() {
 
   return (
     <div className="App">
-      {/* <RestaurantList
+      <RestaurantList
         data={restaurants}
         updateRating={changeRating}
         deleteRestaurant={deleteRestaurant}
-      /> */}
-      <NewRestaurantForm/>
+      />
+      <NewRestaurantForm addRestaurant={postRestaurant} />
     </div>
   );
 }
