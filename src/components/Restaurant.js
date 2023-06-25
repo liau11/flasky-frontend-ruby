@@ -21,7 +21,7 @@ const Restaurant = ({
   // const [updateRating, setRating] = useState(rating);
 
   const determineColor = () => {
-    if (updateRating > 5) {
+    if (rating > 5) {
       return "high-rating";
     } else {
       return "rating";

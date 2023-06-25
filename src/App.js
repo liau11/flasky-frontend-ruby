@@ -3,37 +3,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import NewRestaurantForm from "./components/NewRestaurantForm";
 
-// const data = [
-//   {
-//     id: 1,
-//     name: "Salty's",
-//     cuisine: "Seafood",
-//     rating: 4.8,
-//     distance: "5 miles",
-//   },
-//   {
-//     id: 2,
-//     name: "Toulouse",
-//     cuisine: "Creole",
-//     rating: 2.5,
-//     distance: "2 miles",
-//   },
-//   {
-//     id: 3,
-//     name: "Tanoor",
-//     cuisine: "Arab",
-//     rating: 4,
-//     distance: "2.5 miles",
-//   },
-//   {
-//     id: 4,
-//     name: "Meet",
-//     cuisine: "Korean BBQ",
-//     rating: 4.5,
-//     distance: "1 miles",
-//   },
-// ];
-
 function App() {
   const [restaurants, setRestaurants] = useState([]);
   const API =
@@ -44,7 +13,7 @@ function App() {
       .get(API)
       .then((result) => {
         console.log("in helper function");
-        setRestaurants(result.data);
+        setRestaurants(result.data); // this will cause rerender so you can see the newly added restaurant. Without this, you have only updated the database with the restaurant, but that wouldn't cause a rerender
       })
       .catch((err) => {
         console.log(err);
@@ -57,10 +26,9 @@ function App() {
 
   const postRestaurant = (newRestaurantData) => {
     axios
-      .post(API, newRestaurantData)
+      .post(API, newRestaurantData) // Add new restaurant data to database, but won't cause rerender (you won't see it on the website)
       .then((result) => {
-        console.log(result.data);
-        getAllRestaurants();
+        getAllRestaurants(); // call helper function to change the state so website will rerender to show new data being displayed. If you don't change the state, you'll have to manually refresh the page for it to show all the data, including the newly added data that was just submitted
       })
       .catch((err) => {
         console.log(err);
@@ -68,20 +36,19 @@ function App() {
   };
 
   // changeRating that updates state via API call
+  // callback function from restaurant.js
   const changeRating = (id, originalRating, direction) => {
     const newRating =
       direction === "up" ? originalRating + 1 : originalRating - 1;
 
     axios
-      .patch(`${API}/${id}/rating`, { value: newRating })
+      .patch(`${API}/${id}/rating`, { value: newRating }) // update database
       .then((result) => {
-        console.log(result.data);
-        getAllRestaurants();
+        getAllRestaurants(); // change the state, which causes rerender
       })
       .catch((err) => {
         console.log(err);
       });
-    console.log("changeRating called");
   };
 
   // changeRating that updates state manually (no API call)
@@ -111,10 +78,9 @@ function App() {
 
   const deleteRestaurant = (id) => {
     axios
-      .delete(`${API}/${id}`)
+      .delete(`${API}/${id}`) // delete in database
       .then((result) => {
-        console.log(result.data);
-        const newRestaurants = [];
+        const newRestaurants = []; // put in all the restaurants that don't have the same id (so it's not included in the new state)
         for (let restaurant of restaurants) {
           if (restaurant.id !== id) {
             newRestaurants.push(restaurant);
